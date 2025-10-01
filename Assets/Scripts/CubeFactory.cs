@@ -3,46 +3,57 @@ using UnityEngine;
 
 public class CubeFactory : MonoBehaviour
 {
-    [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private CubeExplosion _cubeExplosion;
+    [SerializeField] private Cube _cubePrefab;
 
     [SerializeField] private int _minCubesCount = 2;
     [SerializeField] private int _maxCubesCount = 6;
-    [SerializeField]private float _splitChanceReduction = 0.5f;
-    [SerializeField]private float _scaleReduction = 0.5f;
+    [SerializeField] private float _splitChanceReduction = 0.5f;
+    [SerializeField] private float _scaleReduction = 0.5f;
     [SerializeField] private float _minScale = 0.1f;
 
-    public void CreateCubes(Cube clickedCube)
+    public Collider[] CreateCubes(Cube clickedCube, out Collider[] cubesColliders)
     {
         Vector3 position = clickedCube.transform.position;
         float scale = clickedCube.Scale;
         float splitChance = clickedCube.SplitChance;
+        cubesColliders = null;
 
 
         if (scale <= _minScale)
         {
             Debug.Log("Размер = " + scale);
             Destroy(clickedCube.gameObject);
-            return;
+            return cubesColliders;
         }
 
         if (Random.value > splitChance)
         {
             Debug.Log("Шанс разделения = " + splitChance);
             Destroy(clickedCube.gameObject);
-            return;
+            return cubesColliders;
         }
 
         int randomCubesCount = Random.Range(_minCubesCount, _maxCubesCount + 1);
-        
+        Collider[] cubes = new Collider[randomCubesCount];
+
         for (int i = 0; i < randomCubesCount; i++)
         {
-            GameObject newCube = Instantiate(_cubePrefab, position, Random.rotation);
-            Cube cube = newCube.GetComponent<Cube>();
-            cube.Init(scale * _scaleReduction, clickedCube.GetNextSplitChance(_splitChanceReduction));
+            Cube newCube = Instantiate(_cubePrefab, position, Random.rotation);
+
+            if (newCube.TryGetComponent<Cube>(out Cube cube))
+            {
+                cube.Init(scale * _scaleReduction, GetNextSplitChance(cube.SplitChance));
+                cube.TryGetComponent<Collider>(out Collider cubeCollider);
+                cubes[i] = cubeCollider;
+            }
         }
 
         Destroy(clickedCube.gameObject);
-        _cubeExplosion.Explode(position);
+        return cubes;
+    }
+
+    private float GetNextSplitChance(float splitChance)
+    {
+        return splitChance * _splitChanceReduction;
     }
 }

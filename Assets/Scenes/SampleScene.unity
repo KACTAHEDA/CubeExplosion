@@ -257,10 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf55239628a1b64897a5f9b0accbadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 963194227}
-  _clickableLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!4 &87668198
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +267,55 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.1236672, y: 3.017718, z: -0.25920194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &128939175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128939177}
+  - component: {fileID: 128939176}
+  m_Layer: 0
+  m_Name: RayCaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &128939176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128939175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc38d4e8e4517234a809e109c41ecc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 963194227}
+  _cubesLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  _userInput: {fileID: 87668197}
+--- !u!4 &128939177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128939175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.22343898, y: 7.0013113, z: -10.056417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1078,8 +1123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4e19ac021fdf343a2102461ba2e673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _userInput: {fileID: 87668197}
+  _rayCaster: {fileID: 128939176}
   _cubeFactory: {fileID: 1197226185}
+  _exploder: {fileID: 1436346199}
 --- !u!4 &1128892082
 Transform:
   m_ObjectHideFlags: 0
@@ -1124,8 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3377da747798a6c438e3083b805b38bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubePrefab: {fileID: 7459372847882313289, guid: f587d652cccab854682e6482b17a3762, type: 3}
-  _cubeExplosion: {fileID: 1436346199}
+  _cubePrefab: {fileID: 9125061285392589807, guid: f587d652cccab854682e6482b17a3762, type: 3}
   _minCubesCount: 2
   _maxCubesCount: 6
   _splitChanceReduction: 0.5
@@ -1291,9 +1336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explitionForce: 500
   _explotionRadius: 5
-  _cubesLayer:
-    serializedVersion: 2
-    m_Bits: 1
+  _raycaster: {fileID: 128939176}
 --- !u!4 &1436346200
 Transform:
   m_ObjectHideFlags: 0
@@ -1745,6 +1788,7 @@ SceneRoots:
   - {fileID: 1197226186}
   - {fileID: 1436346200}
   - {fileID: 1128892082}
+  - {fileID: 128939177}
   - {fileID: 2122946621}
   - {fileID: 618874691}
   - {fileID: 206192003}

@@ -8,13 +8,11 @@ public class Cube : MonoBehaviour
     private float _splitChance;
     private float _maxSplitChance = 1f;
 
-
     public float Scale => transform.localScale.x;
     public float SplitChance => _splitChance;
 
     private void Awake()
     {
-
         Init(Scale, SplitChance);
     }
 
@@ -33,10 +31,5 @@ public class Cube : MonoBehaviour
 
         _renderer = GetComponent<Renderer>();
         _renderer.material.color = Random.ColorHSV();
-    }
-
-    public float GetNextSplitChance(float splitChanceReduction)
-    {
-        return _splitChance * splitChanceReduction;
     }
 }
