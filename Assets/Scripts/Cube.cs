@@ -11,11 +11,11 @@ public class Cube : MonoBehaviour
     public float Scale => transform.localScale.x;
     public float SplitChance => _splitChance;
 
-    public Rigidbody CubeRigidbody { get; private set; } 
+    public Rigidbody Rigidbody { get; private set; } 
 
     private void Awake()
     {
-        CubeRigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         Init(Scale, SplitChance);
     }
 
