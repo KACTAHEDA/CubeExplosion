@@ -9,13 +9,13 @@ public class Exploder : MonoBehaviour
     [SerializeField] private RayCaster _raycaster;
     
 
-    public void Explode(Vector3 position, Collider[] cubes)
+    public void Explode(Vector3 position, Cube[] cubes)
     {       
         foreach (var cube in cubes)
         {
-            if(cube != null && cube.TryGetComponent(out Rigidbody rigidBody))
+            if(cube != null)
             {
-                rigidBody.AddExplosionForce(_explitionForce, position, _explotionRadius);
+                cube.CubeRigidbody.AddExplosionForce(_explitionForce, position, _explotionRadius);
             }
         }
     }

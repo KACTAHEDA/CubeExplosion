@@ -20,12 +20,7 @@ public class ClickProcessor : MonoBehaviour
     private void CubeClick(Cube cube)
     {
         Vector3 position = cube.transform.localPosition;
-
-        _cubeFactory.CreateCubes(cube, out Collider[] cubes);
-
-        if (cubes != null)
-        {
-            _exploder.Explode(position, cubes);
-        }
+        Cube[] cubes = _cubeFactory.CreateCubes(cube);
+        _exploder.Explode(position, cubes);
     }
 }
