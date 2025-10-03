@@ -34,4 +34,20 @@ public class RayCaster : MonoBehaviour
             }
         }
     }
+
+    public Cube[] CubesInRadius(Vector3 center, float rarius)
+    {
+        Collider[] hits = Physics.OverlapSphere(center, rarius, _cubesLayer);
+        List<Cube> cubes = new List<Cube>();
+
+        foreach (var hit in hits)
+        {
+            if(hit.TryGetComponent<Cube>(out Cube cube))
+            {
+                cubes.Add(cube);
+            }
+        }
+
+        return cubes.ToArray();
+    }
 }

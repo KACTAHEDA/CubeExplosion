@@ -9,7 +9,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int _maxCubesCount = 6;
     [SerializeField] private float _splitChanceReduction = 0.5f;
     [SerializeField] private float _scaleReduction = 0.5f;
-
     [SerializeField] public float MinScale => 0.1f;
 
     public Cube[] CreateCubes(Cube clickedCube)

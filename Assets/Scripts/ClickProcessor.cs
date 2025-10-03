@@ -19,11 +19,15 @@ public class ClickProcessor : MonoBehaviour
 
     private void AfterClickOperations(Cube cube)
     {
+        Vector3 position = cube.transform.localPosition;
+
         if (cube.Scale >= _spawner.MinScale && Random.value < cube.SplitChance)
         {
-            Vector3 position = cube.transform.localPosition;
-            Cube[] cubes = _spawner.CreateCubes(cube);
-            _exploder.Explode(position, cubes);
+            _spawner.CreateCubes(cube);
+        }
+        else
+        {
+            _exploder.Explode(cube, _rayCaster.CubesInRadius(position, _exploder.ExplotionRadius));
         }
 
         _spawner.DestroyCube(cube);
